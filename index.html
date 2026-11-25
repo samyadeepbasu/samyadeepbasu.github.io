@@ -446,6 +446,114 @@
     transform: none;
   }
 
+  /* Product impact */
+  .impact-intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin-bottom: 48px;
+  }
+  .impact-list { display: flex; flex-direction: column; gap: 0; }
+  .impact {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 56px;
+    padding: 48px 0;
+    border-top: 1px solid var(--rule);
+    align-items: center;
+  }
+  .impact:last-child { border-bottom: 1px solid var(--rule); }
+  .impact:nth-child(even) .impact-vis { order: -1; }
+  .impact-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .impact-title {
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-bottom: 16px;
+  }
+  .impact-title em { color: var(--accent); }
+  .impact-desc { color: var(--ink-soft); font-size: 16px; line-height: 1.6; margin-bottom: 20px; }
+  .impact-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .impact-tags span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    padding: 3px 8px;
+  }
+  .impact-links {
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  }
+  .impact-vis {
+    background: var(--bg-alt);
+    border: 1px solid var(--rule);
+    padding: 24px;
+    position: relative;
+  }
+  .impact-vis svg { width: 100%; height: auto; display: block; }
+  .vis-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  /* Slider demo */
+  .slider-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 14px; }
+  .slider-strip button {
+    padding: 0; border: 1px solid var(--rule); background: none; cursor: pointer;
+    aspect-ratio: 1; overflow: hidden; opacity: 0.55; transition: opacity .2s, border-color .2s;
+  }
+  .slider-strip button.on { opacity: 1; border-color: var(--accent); }
+  .slider-strip svg { width: 100%; height: 100%; }
+  .slider-row {
+    display: flex; align-items: center; gap: 12px; margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint);
+  }
+  .slider-row input[type=range] { flex: 1; accent-color: var(--accent); }
+  .slider-label { color: var(--ink); min-width: 9ch; text-align: right; }
+
+  /* Attribution demo */
+  .attr-src { cursor: default; transition: opacity .2s; }
+  .attr-sent { transition: fill .2s; }
+
+  /* SVG theme classes */
+  .f-bg { fill: var(--bg); } .f-alt { fill: var(--bg-alt); } .f-ink { fill: var(--ink); }
+  .f-soft { fill: var(--ink-soft); } .f-faint { fill: var(--ink-faint); } .f-rule { fill: var(--rule); }
+  .f-acc { fill: var(--accent); } .f-accs { fill: var(--accent-soft); }
+  .s-rule { stroke: var(--rule); } .s-acc { stroke: var(--accent); } .s-faint { stroke: var(--ink-faint); }
+  .t-mono { font-family: 'JetBrains Mono', monospace; }
+  .t-serif { font-family: 'Fraunces', serif; }
+  @keyframes scan { 0% { transform: translateY(0); } 100% { transform: translateY(196px); } }
+  .scanline { animation: scan 3.2s ease-in-out infinite alternate; }
+  @media (prefers-reduced-motion: reduce) { .scanline { animation: none; } }
+
+  /* Preprint badge */
+  .pub-venue .badge.pre { background: transparent; border: 1px solid var(--rule); color: var(--ink-faint); }
+  .pub-authors .senior::after { content: "†"; color: var(--accent); margin-left: 1px; }
+  .pub-note {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-faint);
+    letter-spacing: 0.04em; margin-top: 16px;
+  }
+
   /* Responsive */
   @media (max-width: 820px) {
     body { font-size: 16px; }
@@ -463,6 +571,9 @@
     .pub-venue { text-align: left; }
     .exp-item { grid-template-columns: 1fr; gap: 12px; }
     .sec-title { font-size: 28px; }
+    .impact { grid-template-columns: 1fr; gap: 28px; padding: 36px 0; }
+    .impact:nth-child(even) .impact-vis { order: 0; }
+    .impact-title { font-size: 24px; }
     nav.nav { display: none; }
   }
 </style>
@@ -474,6 +585,7 @@
     <a href="#" class="brand"><strong>Samyadeep Basu</strong> · Research Scientist</a>
     <nav class="nav">
       <a href="#about">About</a>
+      <a href="#impact">Impact</a>
       <a href="#news">News</a>
       <a href="#publications">Publications</a>
       <a href="#experience">Experience</a>
@@ -502,7 +614,8 @@
     </div>
     <div class="reveal" style="transition-delay: 0.15s;">
       <div class="portrait">
-        <img src="https://pbs.twimg.com/profile_images/1554575903379914752/yxSd1aX9_400x400.jpg" alt="Samyadeep Basu" />
+        <img src="assets/profile.jpg" alt="Samyadeep Basu" width="400" height="400"
+             onerror="this.onerror=null; this.src='https://pbs.twimg.com/profile_images/1554575903379914752/yxSd1aX9_400x400.jpg';" />
       </div>
       <div class="portrait-caption">San Jose · 2026</div>
     </div>
@@ -553,22 +666,223 @@
   </div>
 </section>
 
+<!-- PRODUCT IMPACT -->
+<section id="impact">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02 / Product Impact</span>
+      <span class="sec-title">From papers to products</span>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="impact-intro">
+      Research that ships. Below are models I've post-trained and taken to production at Adobe, across creative, marketing and enterprise surfaces.
+    </p>
+
+    <div class="impact-list">
+
+      <!-- 1. Firefly: continuous editing -->
+      <article class="impact reveal">
+        <div>
+          <div class="impact-kicker">Adobe Firefly · Creative</div>
+          <h3 class="impact-title">Continuous image editing, <em>on a slider</em></h3>
+          <p class="impact-desc">
+            Shipped post-trained continuous image-editing models to <strong>Firefly.com</strong> as the <strong>Tune / Generative Restyle</strong> feature. Instead of re-prompting, a user dials an edit's intensity up or down along a smooth trajectory, building on the research in <em>SliderEdit</em> (CVPR 2026 Oral) and <em>SliderEdit++</em>.
+          </p>
+          <div class="impact-tags"><span>Post-training</span><span>Diffusion / DiT</span><span>Instruction editing</span></div>
+          <div class="impact-links">
+            <a href="https://firefly.adobe.com">→ Try in Firefly</a>
+            <a href="https://community.adobe.com/announcements-710/fine-tune-your-ai-edits-with-generative-restyle-1653465">→ Generative Restyle announcement</a>
+            <a href="https://arxiv.org/abs/2511.09715">→ SliderEdit paper</a>
+          </div>
+        </div>
+        <div class="impact-vis">
+          <div id="restyle-main"></div>
+          <div class="slider-row">
+            <span>Subtle</span>
+            <input type="range" id="restyle-range" min="0" max="100" value="35" aria-label="Edit intensity" />
+            <span>Dramatic</span>
+          </div>
+          <div class="slider-strip" id="restyle-strip"></div>
+          <div class="vis-caption"><span>Prompt: "golden-hour restyle"</span><span class="slider-label" id="restyle-val">35%</span></div>
+        </div>
+      </article>
+
+      <!-- 2. Brand Concierge: on-device attribution -->
+      <article class="impact reveal">
+        <div>
+          <div class="impact-kicker">Adobe Brand Concierge · Enterprise</div>
+          <h3 class="impact-title">On-device <em>attribution</em> for grounded answers</h3>
+          <p class="impact-desc">
+            Shipped on-device attribution models for <strong>Brand Concierge</strong>, Adobe's conversational AI for brand websites. Each generated sentence is traced back to the approved brand content it came from, so answers stay grounded and checkable. It builds on my work on post-hoc attribution (<em>Decomposition-Enhanced Training</em>, EACL 2026) and mechanistic circuits for extractive QA (COLM 2025).
+          </p>
+          <div class="impact-tags"><span>SLMs</span><span>Attribution</span><span>On-device inference</span></div>
+          <div class="impact-links">
+            <a href="https://business.adobe.com/products/brand-concierge.html">→ Brand Concierge</a>
+            <a href="https://arxiv.org/abs/2510.25766">→ Attribution paper</a>
+          </div>
+        </div>
+        <div class="impact-vis">
+          <svg viewBox="0 0 440 280" role="img" aria-label="Diagram: each sentence of a chatbot answer linked to the source page that supports it">
+            <!-- chat panel -->
+            <rect x="0" y="0" width="236" height="280" rx="2" class="f-bg s-rule" stroke-width="1"/>
+            <text x="14" y="22" class="t-mono f-faint" font-size="8" letter-spacing="1">VISITOR</text>
+            <rect x="14" y="30" width="208" height="30" rx="2" class="f-alt"/>
+            <text x="22" y="49" class="t-serif f-ink" font-size="11">Does the Pro plan support teams?</text>
+            <text x="14" y="84" class="t-mono f-faint" font-size="8" letter-spacing="1">CONCIERGE</text>
+            <g class="attr-sent-g" data-i="0">
+              <rect class="attr-sent f-accs" x="14" y="92" width="208" height="40" rx="2"/>
+              <text x="22" y="108" class="t-serif f-ink" font-size="11">Yes, Pro includes shared</text>
+              <text x="22" y="123" class="t-serif f-ink" font-size="11">team libraries.</text>
+              <text x="206" y="123" class="t-mono f-acc" font-size="9">[1]</text>
+            </g>
+            <g class="attr-sent-g" data-i="1">
+              <rect class="attr-sent f-alt" x="14" y="138" width="208" height="40" rx="2"/>
+              <text x="22" y="154" class="t-serif f-ink" font-size="11">You can add up to ten seats</text>
+              <text x="22" y="169" class="t-serif f-ink" font-size="11">per workspace.</text>
+              <text x="206" y="169" class="t-mono f-acc" font-size="9">[2]</text>
+            </g>
+            <g class="attr-sent-g" data-i="2">
+              <rect class="attr-sent f-alt" x="14" y="184" width="208" height="40" rx="2"/>
+              <text x="22" y="200" class="t-serif f-ink" font-size="11">Billing is monthly or annual,</text>
+              <text x="22" y="215" class="t-serif f-ink" font-size="11">cancel any time.</text>
+              <text x="206" y="215" class="t-mono f-acc" font-size="9">[3]</text>
+            </g>
+            <rect x="14" y="242" width="104" height="22" rx="11" class="f-ink"/>
+            <circle cx="28" cy="253" r="3" class="f-acc"/>
+            <text x="36" y="256" class="t-mono f-bg" font-size="8" letter-spacing="0.5">ON-DEVICE</text>
+            <!-- links -->
+            <g fill="none" stroke-width="1.2">
+              <path class="attr-link s-acc" data-i="0" d="M222 112 C 252 112, 252 52, 284 52"/>
+              <path class="attr-link s-faint" data-i="1" d="M222 158 C 252 158, 252 140, 284 140" stroke-dasharray="3 3"/>
+              <path class="attr-link s-faint" data-i="2" d="M222 204 C 252 204, 252 228, 284 228" stroke-dasharray="3 3"/>
+            </g>
+            <!-- sources -->
+            <g class="attr-src" data-i="0">
+              <rect x="284" y="20" width="156" height="64" rx="2" class="f-bg s-acc" stroke-width="1"/>
+              <text x="294" y="38" class="t-mono f-acc" font-size="8">[1] /plans/pro</text>
+              <rect x="294" y="48" width="120" height="5" class="f-rule"/><rect x="294" y="58" width="134" height="5" class="f-accs"/><rect x="294" y="68" width="96" height="5" class="f-rule"/>
+            </g>
+            <g class="attr-src" data-i="1" opacity="0.55">
+              <rect x="284" y="108" width="156" height="64" rx="2" class="f-bg s-rule" stroke-width="1"/>
+              <text x="294" y="126" class="t-mono f-faint" font-size="8">[2] /teams/faq</text>
+              <rect x="294" y="136" width="128" height="5" class="f-rule"/><rect x="294" y="146" width="110" height="5" class="f-rule"/><rect x="294" y="156" width="130" height="5" class="f-rule"/>
+            </g>
+            <g class="attr-src" data-i="2" opacity="0.55">
+              <rect x="284" y="196" width="156" height="64" rx="2" class="f-bg s-rule" stroke-width="1"/>
+              <text x="294" y="214" class="t-mono f-faint" font-size="8">[3] /billing</text>
+              <rect x="294" y="224" width="100" height="5" class="f-rule"/><rect x="294" y="234" width="134" height="5" class="f-rule"/><rect x="294" y="244" width="118" height="5" class="f-rule"/>
+            </g>
+          </svg>
+          <div class="vis-caption"><span>Sentence → source attribution</span><span>Hover a sentence</span></div>
+        </div>
+      </article>
+
+      <!-- 3. GenStudio: document parsing -->
+      <article class="impact reveal">
+        <div>
+          <div class="impact-kicker">Adobe GenStudio · Enterprise</div>
+          <h3 class="impact-title">State-of-the-art <em>document parsing</em></h3>
+          <p class="impact-desc">
+            Shipped state-of-the-art post-trained document-parsing models for enterprise use cases in <strong>GenStudio</strong>. Marketers upload brand guidelines and briefs as PDFs, and the VLM turns layouts, tables and figures into structured data that drives on-brand content generation.
+          </p>
+          <div class="impact-tags"><span>VLM post-training</span><span>Layout understanding</span><span>Structured extraction</span></div>
+          <div class="impact-links">
+            <a href="https://business.adobe.com/products/genstudio-for-performance-marketing.html">→ GenStudio for Performance Marketing</a>
+            <a href="https://experienceleague.adobe.com/en/docs/genstudio-for-performance-marketing/user-guide/guidelines/add-guidelines">→ Brand guideline upload</a>
+          </div>
+        </div>
+        <div class="impact-vis">
+          <svg viewBox="0 0 440 260" role="img" aria-label="Diagram: a PDF page with detected layout regions converted into structured JSON">
+            <!-- page -->
+            <rect x="0" y="10" width="170" height="236" rx="2" class="f-bg s-rule" stroke-width="1"/>
+            <g>
+              <rect x="14" y="26" width="110" height="14" class="f-accs"/>
+              <rect x="12" y="24" width="114" height="18" fill="none" class="s-acc" stroke-width="1"/>
+              <text x="14" y="21" class="t-mono f-acc" font-size="6">TITLE</text>
+              <rect x="14" y="58" width="142" height="4" class="f-rule"/><rect x="14" y="66" width="136" height="4" class="f-rule"/><rect x="14" y="74" width="142" height="4" class="f-rule"/><rect x="14" y="82" width="98" height="4" class="f-rule"/>
+              <rect x="12" y="55" width="146" height="34" fill="none" class="s-faint" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="14" y="52" class="t-mono f-faint" font-size="6">TEXT</text>
+              <g class="s-rule" stroke-width="1">
+                <rect x="14" y="108" width="142" height="54" class="f-alt"/>
+                <line x1="14" y1="126" x2="156" y2="126"/><line x1="14" y1="144" x2="156" y2="144"/>
+                <line x1="61" y1="108" x2="61" y2="162"/><line x1="108" y1="108" x2="108" y2="162"/>
+              </g>
+              <rect x="12" y="106" width="146" height="58" fill="none" class="s-acc" stroke-width="1"/>
+              <text x="14" y="103" class="t-mono f-acc" font-size="6">TABLE</text>
+              <rect x="14" y="182" width="66" height="50" class="f-alt"/>
+              <circle cx="34" cy="198" r="7" class="f-rule"/><path d="M14 232 L40 206 L56 220 L80 196 L80 232 Z" class="f-rule"/>
+              <rect x="12" y="180" width="70" height="54" fill="none" class="s-faint" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="14" y="177" class="t-mono f-faint" font-size="6">FIGURE</text>
+              <rect x="90" y="186" width="66" height="4" class="f-rule"/><rect x="90" y="194" width="60" height="4" class="f-rule"/><rect x="90" y="202" width="66" height="4" class="f-rule"/>
+            </g>
+            <g class="scanline"><rect x="0" y="10" width="170" height="2" class="f-acc" opacity="0.5"/></g>
+            <!-- arrow -->
+            <g class="s-acc" stroke-width="1.2" fill="none"><path d="M182 128 L214 128"/><path d="M208 122 L214 128 L208 134"/></g>
+            <text x="180" y="118" class="t-mono f-faint" font-size="7">VLM</text>
+            <!-- json -->
+            <rect x="224" y="10" width="216" height="236" rx="2" class="f-ink"/>
+            <g class="t-mono" font-size="9.5">
+              <text x="236" y="34" class="f-faint">{</text>
+              <text x="246" y="52"><tspan class="f-acc">"title"</tspan><tspan class="f-bg">: "Brand Voice 2026",</tspan></text>
+              <text x="246" y="70"><tspan class="f-acc">"tone"</tspan><tspan class="f-bg">: ["warm", "precise"],</tspan></text>
+              <text x="246" y="88"><tspan class="f-acc">"colors"</tspan><tspan class="f-bg">: {</tspan></text>
+              <text x="258" y="106" class="f-bg">"primary": "#C8431F",</text>
+              <text x="258" y="124" class="f-bg">"neutral": "#FAF8F4" },</text>
+              <text x="246" y="142"><tspan class="f-acc">"table"</tspan><tspan class="f-bg">: [[…], […], […]],</tspan></text>
+              <text x="246" y="160"><tspan class="f-acc">"figures"</tspan><tspan class="f-bg">: [{ "bbox": […],</tspan></text>
+              <text x="258" y="178" class="f-bg">"caption": "…" }],</text>
+              <text x="246" y="196"><tspan class="f-acc">"reading_order"</tspan><tspan class="f-bg">: [0,1,2,3]</tspan></text>
+              <text x="236" y="214" class="f-faint">}</text>
+            </g>
+          </svg>
+          <div class="vis-caption"><span>PDF → layout → structured JSON</span><span>Enterprise briefs &amp; guidelines</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <!-- NEWS -->
 <section id="news">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">02 / News</span>
+      <span class="sec-num">03 / News</span>
       <span class="sec-title">What's recent</span>
       <span class="sec-rule"></span>
     </div>
     <div class="news-list">
+      <div class="news-item">
+        <div class="news-date">Nov 2026</div>
+        <div class="news-text"><span class="tag">EMNLP · EACL</span><a href="https://arxiv.org/abs/2608.08389">Not Worth Another Token</a> (efficient deep-research agents) accepted to <strong>EMNLP 2026</strong>, and <a href="https://arxiv.org/abs/2607.01420">MultAttnAttrib</a> (training-free multimodal attribution for long-document QA) accepted to <strong>EACL 2027</strong>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Nov 2026</div>
+        <div class="news-text"><span class="tag">Shipped</span>Continuous image-editing models are now live in Adobe Firefly as <strong>Tune / Generative Restyle</strong>. See <a href="#impact">Product Impact</a>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Oct 2026</div>
+        <div class="news-text"><span class="tag">Preprint</span><a href="https://arxiv.org/abs/2610.14253">SliderEdit++</a>: improved slider trajectories for instruction-based image editing.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Sep 2026</div>
+        <div class="news-text"><span class="tag">Preprints</span>New work on <a href="https://arxiv.org/abs/2609.04063">spurious advantage in GRPO</a>, <a href="https://arxiv.org/abs/2609.05824">diversity-aware skill routing for LLM agents</a>, and <a href="https://arxiv.org/abs/2609.00591">single-pass fine-grained captioning</a>.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Jul 2026</div>
+        <div class="news-text"><span class="tag">Preprint</span><a href="https://arxiv.org/abs/2606.26122">DocArena</a>: turning raw documents into training environments for document search agents.</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">Jul 2026</div>
+        <div class="news-text"><span class="tag">COLM</span><a href="https://arxiv.org/abs/2609.38585">FlexRouter</a>: learning complementary model sets for flexible LLM routing, accepted to <strong>COLM 2026</strong>.</div>
+      </div>
       <div class="news-item">
         <div class="news-date">Mar 2026</div>
         <div class="news-text"><span class="tag">Oral · CVPR</span>SliderEdit accepted as <strong>Oral</strong> at CVPR 2026 — continuous image editing with fine-grained instruction control.</div>
       </div>
       <div class="news-item">
         <div class="news-date">Feb 2026</div>
-        <div class="news-text"><span class="tag">EACL</span>Decomposition-Enhanced Training for Post-Hoc Attributions accepted to EACL 2026.</div>
+        <div class="news-text"><span class="tag">EACL · WSDM</span>Two papers at EACL 2026 (post-hoc attributions; a survey on LLM-based user simulation) and one at WSDM 2026 on how LMs use retrieved vs. parametric knowledge.</div>
       </div>
       <div class="news-item">
         <div class="news-date">Nov 2025</div>
@@ -602,13 +916,15 @@
 <section id="publications">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">03 / Selected Publications</span>
+      <span class="sec-num">04 / Selected Publications</span>
       <span class="sec-title">Recent work</span>
       <span class="sec-rule"></span>
     </div>
 
     <div class="pub-filters">
       <button class="active" data-filter="all">All</button>
+      <button data-filter="conf">Peer-reviewed</button>
+      <button data-filter="pre">Preprints</button>
       <button data-filter="2026">2026</button>
       <button data-filter="2025">2025</button>
       <button data-filter="2024">2024</button>
@@ -616,115 +932,253 @@
     </div>
 
     <div id="pubs">
-      <div class="pub" data-year="2026">
+      <div class="pub" data-year="2026" data-type="conf">
         <div class="pub-year">2026</div>
         <div>
-          <div class="pub-title"><a href="#">SliderEdit: Continuous Image Editing with Fine-Grained Instruction Control</a></div>
-          <div class="pub-authors">A. Zarei, <span class="me">S. Basu</span>, M. Pournemat, S. Nag, S. Feizi</div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2511.09715">SliderEdit: Continuous Image Editing with Fine-Grained Instruction Control</a></div>
+          <div class="pub-authors">A. Zarei, <span class="me">S. Basu</span>, M. Pournemat, S. Nag, R. Rossi, S. Feizi</div>
         </div>
         <div class="pub-venue">CVPR 2026<br><span class="badge">Oral</span></div>
       </div>
 
-      <div class="pub" data-year="2026">
+      <div class="pub" data-year="2026" data-type="pre">
         <div class="pub-year">2026</div>
         <div>
-          <div class="pub-title"><a href="#">Decomposition-Enhanced Training for Post-Hoc Attributions in Language Models</a></div>
-          <div class="pub-authors">S. Balasubramaniam, <span class="me">S. Basu</span>, K. Goswami, S. Feizi, R. Rossi, V. Manjunatha, N. Lipka</div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2610.14253">SliderEdit++: Improved Slider Trajectories in Instruction-Based Image Editing</a></div>
+          <div class="pub-authors">A. Zarei, S. Nag, B. Wang, F. Dernoncourt, V. Manjunatha, N. Lipka, S. Feizi, <span class="me senior">S. Basu</span></div>
+        </div>
+        <div class="pub-venue">arXiv 2026<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+
+      <div class="pub" data-year="2026" data-type="conf">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2608.08389">Not Worth Another Token: Marginal Value Estimation for Efficient Deep Research Agents</a></div>
+          <div class="pub-authors">H. Kolukuluru, R. Ashok, K. Arora, E. W. Ciccarelli, N. A. Kumar, L. Nie, F. Dernoncourt, <span class="me">S. Basu</span>, R. Rossi, N. Lipka</div>
+        </div>
+        <div class="pub-venue">EMNLP 2026</div>
+      </div>
+
+      <div class="pub" data-year="2026" data-type="conf">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2607.01420">MultAttnAttrib: Training-Free Multimodal Attribution in Long Document Question Answering</a></div>
+          <div class="pub-authors">D. Q. T. Tran, Q. V. Dang, V. Tyagi, S. S. R. Veeravalli, T. Nguyen, R. Rossi, F. Dernoncourt, N. Lipka, K. Goswami, <span class="me senior">S. Basu</span></div>
+        </div>
+        <div class="pub-venue">EACL 2027</div>
+      </div>
+
+      <div class="pub" data-year="2026" data-type="conf">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2609.38585">FlexRouter: Learning Complementary Model Sets for Flexible LLM Routing</a></div>
+          <div class="pub-authors">W. Wei, H. Yang, T. Yang, <span class="me">S. Basu</span>, H. Chen, A. Zhao, F. Dernoncourt, R. Rossi, H. Eldardiry</div>
+        </div>
+        <div class="pub-venue">COLM 2026</div>
+      </div>
+
+      <div class="pub" data-year="2026" data-type="conf">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://doi.org/10.18653/v1/2026.eacl-long.236">Decomposition-Enhanced Training for Post-Hoc Attributions in Language Models</a></div>
+          <div class="pub-authors">S. Balasubramanian, <span class="me">S. Basu</span>, K. Goswami, R. Rossi, V. Manjunatha, R. Santhosh, R. Zhang, S. Feizi, N. Lipka</div>
         </div>
         <div class="pub-venue">EACL 2026</div>
       </div>
 
-      <div class="pub" data-year="2026">
+      <div class="pub" data-year="2026" data-type="conf">
         <div class="pub-year">2026</div>
         <div>
-          <div class="pub-title"><a href="#">FlexRouter: Learning Complementary Model Sets for Flexible LLM Routing</a></div>
-          <div class="pub-authors">W. Wei, H. Yang, T. Yang, <span class="me">S. Basu</span>, H. Chen, R. Rossi, H. Eldardiry</div>
+          <div class="pub-title"><a href="https://doi.org/10.18653/v1/2026.eacl-long.200">A Survey on LLM-based Conversational User Simulation</a></div>
+          <div class="pub-authors">B. Ni, Y. Wang, L. Wang, B. Kveton, F. Dernoncourt, …, <span class="me">S. Basu</span>, …, T. Derr, R. Rossi</div>
         </div>
-        <div class="pub-venue">Under Review<br><span class="badge">COLM</span></div>
+        <div class="pub-venue">EACL 2026</div>
       </div>
 
-      <div class="pub" data-year="2025">
+      <div class="pub" data-year="2026" data-type="conf">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://doi.org/10.1145/3779211.3793209">From RAGs to Rich Parameters: Probing How Language Models Utilize External Knowledge over Parametric Information for Factual Queries</a></div>
+          <div class="pub-authors">H. Wadhwa, R. Seetharaman, S. Aggarwal, R. Ghosh, <span class="me">S. Basu</span>, S. Srinivasan, W. Zhao, S. Chaudhari, E. Aghazadeh</div>
+        </div>
+        <div class="pub-venue">WSDM 2026<br><span class="badge">Companion</span></div>
+      </div>
+
+      <div class="pub" data-year="2026" data-type="pre">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2609.04063">Spurious Advantage Hidden in GRPO</a></div>
+          <div class="pub-authors">J. Wang, <span class="me">S. Basu</span>, K. Goswami, T. Yu, Z. Tao</div>
+        </div>
+        <div class="pub-venue">arXiv 2026<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+      <div class="pub" data-year="2026" data-type="pre">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2609.05824">Beyond Top-k Skill Retrieval: Diversity-Aware Skill Routing for LLM Agents</a></div>
+          <div class="pub-authors">W. Wei, T. Yang, <span class="me">S. Basu</span>, H. Chen, Y. Zhao, Z. Tu, X. Hu, F. Dernoncourt, R. Rossi, H. Eldardiry</div>
+        </div>
+        <div class="pub-venue">arXiv 2026<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+
+      <div class="pub" data-year="2026" data-type="pre">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2609.00591">A Glance Is All You Need: Single-Pass Fine-Grained Image Captioning with SimLoss</a></div>
+          <div class="pub-authors">S. Jain, R. Barkur, V. G, R. Rossi, F. Dernoncourt, J. Z. Wang, K. Goswami, N. Lipka, P. Mathur, <span class="me">S. Basu</span>, S. Yoon</div>
+        </div>
+        <div class="pub-venue">arXiv 2026<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+
+      <div class="pub" data-year="2026" data-type="pre">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2606.26122">DocArena: Turning Raw Documents into Controllable Training Environments for Document Search Agents</a></div>
+          <div class="pub-authors">J. Wang, R. Zhang, T. Yu, J. Shi, <span class="me">S. Basu</span>, R. Jain, Z. Tao, T. Sun</div>
+        </div>
+        <div class="pub-venue">arXiv 2026<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+      <div class="pub" data-year="2026" data-type="pre">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2610.00737">Personalized Image Generation with Reasoning and Reflection</a></div>
+          <div class="pub-authors">B. Ni, N. N. Tran, Q. Ge, F. Dernoncourt, S. Yoon, <span class="me">S. Basu</span>, …, R. Rossi, T. Derr</div>
+        </div>
+        <div class="pub-venue">arXiv 2026<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+      <div class="pub" data-year="2026" data-type="pre">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2602.13028">Human-Aligned MLLM Judges for Fine-Grained Image Editing Evaluation: A Benchmark, Framework, and Analysis</a></div>
+          <div class="pub-authors">R. Liu, H. Weingord, S. Mittal, …, <span class="me">S. Basu</span>, …, R. Rossi, Z. Tu, H. Du</div>
+        </div>
+        <div class="pub-venue">arXiv 2026<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+      <div class="pub" data-year="2025" data-type="conf">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2505.18832">Localizing Knowledge in Diffusion Transformers</a></div>
+          <div class="pub-authors">A. Zarei, <span class="me">S. Basu</span>, K. Rezaei, Z. Lin, S. Nag, S. Feizi</div>
+        </div>
+        <div class="pub-venue">NeurIPS 2025</div>
+      </div>
+
+      <div class="pub" data-year="2025" data-type="conf">
         <div class="pub-year">2025</div>
         <div>
           <div class="pub-title"><a href="https://arxiv.org/abs/2505.23945">A Closer Look at Bias and Chain-of-Thought Faithfulness of Large (Vision) Language Models</a></div>
           <div class="pub-authors">S. Balasubramanian, <span class="me">S. Basu</span>, S. Feizi</div>
         </div>
-        <div class="pub-venue">EMNLP 2025</div>
+        <div class="pub-venue">EMNLP 2025<br><span class="badge">Findings</span></div>
       </div>
 
-      <div class="pub" data-year="2025">
+      <div class="pub" data-year="2025" data-type="conf">
         <div class="pub-year">2025</div>
         <div>
-          <div class="pub-title"><a href="https://arxiv.org/abs/2505.18832">Localizing Knowledge in Diffusion Transformers</a></div>
-          <div class="pub-authors">A. Zarei, <span class="me">S. Basu</span>, K. Rezaei, S. Nag, S. Feizi</div>
-        </div>
-        <div class="pub-venue">NeurIPS 2025</div>
-      </div>
-
-      <div class="pub" data-year="2025">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title"><a href="https://www.arxiv.org/pdf/2502.08059">On Mechanistic Circuits for Extractive Question-Answering</a></div>
-          <div class="pub-authors"><span class="me">S. Basu</span>, V. Morariu, R. Rossi, N. Zhao, Z. Wang, S. Feizi, V. Manjunatha</div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2502.08059">On Mechanistic Circuits for Extractive Question-Answering</a></div>
+          <div class="pub-authors"><span class="me">S. Basu</span>, V. Morariu, Z. Wang, R. Rossi, C. Zhao, S. Feizi, V. Manjunatha</div>
         </div>
         <div class="pub-venue">COLM 2025</div>
       </div>
 
-      <div class="pub" data-year="2025">
+      <div class="pub" data-year="2025" data-type="conf">
         <div class="pub-year">2025</div>
         <div>
-          <div class="pub-title"><a href="https://arxiv.org/abs/2404.08030">Rethinking Copyright Infringements in the Era of Text-to-Image Models</a></div>
-          <div class="pub-authors">M. Moayeri, <span class="me">S. Basu</span>, S. Balasubramaniam, P. Kattakinda, R. Brauneis, S. Feizi</div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2404.08030">Rethinking Artistic Copyright Infringements in the Era of Text-to-Image Generative Models</a></div>
+          <div class="pub-authors">M. Moayeri, S. Balasubramanian, <span class="me">S. Basu</span>, P. Kattakinda, A. Chegini, R. Brauneis, S. Feizi</div>
         </div>
         <div class="pub-venue">ICLR 2025</div>
       </div>
 
-      <div class="pub" data-year="2024">
+      <div class="pub" data-year="2025" data-type="conf">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title"><a href="https://aclanthology.org/2025.ranlp-1.93/">A Survey on Small Language Models</a></div>
+          <div class="pub-authors">C. V. Nguyen, X. Shen, R. Aponte, Y. Xia, <span class="me">S. Basu</span>, …, R. Rossi, T. H. Nguyen</div>
+        </div>
+        <div class="pub-venue">RANLP 2025</div>
+      </div>
+
+      <div class="pub" data-year="2025" data-type="pre">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2502.17516">A Survey on Mechanistic Interpretability for Multi-Modal Foundation Models</a></div>
+          <div class="pub-authors">Z. Lin, <span class="me">S. Basu</span>, M. Beigi, V. Manjunatha, R. Rossi, …, S. Feizi, L. Huang</div>
+        </div>
+        <div class="pub-venue">arXiv 2025<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+      <div class="pub" data-year="2025" data-type="pre">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2508.04699">Hop, Skip, and Overthink: Diagnosing Why Reasoning Models Fumble during Multi-Hop Analysis</a></div>
+          <div class="pub-authors">A. Yadav, I. Nalawade, S. Pillarichety, Y. Babu, R. Ghosh, <span class="me">S. Basu</span>, W. Zhao, A. Nasaeh, S. Balasubramanian, S. Srinivasan</div>
+        </div>
+        <div class="pub-venue">arXiv 2025<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+      <div class="pub" data-year="2024" data-type="conf">
         <div class="pub-year">2024</div>
         <div>
-          <div class="pub-title"><a href="https://arxiv.org/html/2406.04236v1">Understanding Information Storage and Transfer in Multimodal Language Models</a></div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2406.04236">Understanding Information Storage and Transfer in Multi-Modal Large Language Models</a></div>
           <div class="pub-authors"><span class="me">S. Basu</span>, M. Grayson, C. Morrison, B. Nushi, S. Feizi, D. Massiceti</div>
         </div>
         <div class="pub-venue">NeurIPS 2024</div>
       </div>
 
-      <div class="pub" data-year="2024">
+      <div class="pub" data-year="2024" data-type="conf">
         <div class="pub-year">2024</div>
         <div>
           <div class="pub-title"><a href="https://arxiv.org/abs/2406.01583">Decomposing and Interpreting Image Representations via Text in ViTs Beyond CLIP</a></div>
-          <div class="pub-authors">S. Balasubramaniam, <span class="me">S. Basu</span>, S. Feizi</div>
+          <div class="pub-authors">S. Balasubramanian, <span class="me">S. Basu</span>, S. Feizi</div>
         </div>
         <div class="pub-venue">NeurIPS 2024</div>
       </div>
 
-      <div class="pub" data-year="2024">
+      <div class="pub" data-year="2024" data-type="conf">
         <div class="pub-year">2024</div>
         <div>
           <div class="pub-title"><a href="https://arxiv.org/abs/2405.01008">On Mechanistic Knowledge Localization in Text-to-Image Generative Models</a></div>
-          <div class="pub-authors"><span class="me">S. Basu</span>, K. Rezaei, V. Morariu, C. Zhao, R. Rossi, V. Manjunatha, S. Feizi</div>
+          <div class="pub-authors"><span class="me">S. Basu</span>, K. Rezaei, P. Kattakinda, V. Morariu, N. Zhao, R. Rossi, V. Manjunatha, S. Feizi</div>
         </div>
         <div class="pub-venue">ICML 2024</div>
       </div>
 
-      <div class="pub" data-year="2024">
+      <div class="pub" data-year="2024" data-type="conf">
         <div class="pub-year">2024</div>
         <div>
           <div class="pub-title"><a href="https://arxiv.org/abs/2310.13730">Localizing and Editing Knowledge in Text-to-Image Generative Models</a></div>
-          <div class="pub-authors"><span class="me">S. Basu</span>, V. Morariu, C. Zhao, S. Feizi, V. Manjunatha</div>
+          <div class="pub-authors"><span class="me">S. Basu</span>, N. Zhao, V. Morariu, S. Feizi, V. Manjunatha</div>
         </div>
         <div class="pub-venue">ICLR 2024</div>
       </div>
 
-      <div class="pub" data-year="2024">
+      <div class="pub" data-year="2024" data-type="conf">
         <div class="pub-year">2024</div>
         <div>
-          <div class="pub-title"><a href="https://arxiv.org/abs/2307.09233">Distilling Knowledge from Text-to-Image Models Improves Visio-Linguistic Reasoning in CLIP</a></div>
-          <div class="pub-authors"><span class="me">S. Basu</span>, M. Sanjabi, S. Hu, D. Massiceti, S. Feizi</div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2307.09233">Distilling Knowledge from Text-to-Image Generative Models Improves Visio-Linguistic Reasoning in CLIP</a></div>
+          <div class="pub-authors"><span class="me">S. Basu</span>, S. Hu, M. Sanjabi, D. Massiceti, S. Feizi</div>
         </div>
         <div class="pub-venue">EMNLP 2024</div>
       </div>
 
-      <div class="pub" data-year="2024">
+      <div class="pub" data-year="2024" data-type="conf">
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2406.13683">IntCoOp: Interpretability-Aware Vision-Language Prompt Tuning</a></div>
+          <div class="pub-authors">S. S. Ghosal, <span class="me">S. Basu</span>, S. Feizi, D. Manocha</div>
+        </div>
+        <div class="pub-venue">EMNLP 2024</div>
+      </div>
+
+      <div class="pub" data-year="2024" data-type="conf">
         <div class="pub-year">2024</div>
         <div>
           <div class="pub-title"><a href="https://arxiv.org/abs/2304.01917">Strong Baselines for Parameter-Efficient Few-Shot Fine-Tuning</a></div>
@@ -733,25 +1187,43 @@
         <div class="pub-venue">AAAI 2024</div>
       </div>
 
-      <div class="pub" data-year="earlier">
+      <div class="pub" data-year="earlier" data-type="conf">
         <div class="pub-year">2023</div>
         <div>
-          <div class="pub-title"><a href="https://openreview.net/pdf?id=wq0luyH3m4">Hard Meta-Dataset++: Towards Understanding Few-shot Performance on Difficult Tasks</a></div>
+          <div class="pub-title"><a href="https://openreview.net/forum?id=wq0luyH3m4">Hard Meta-Dataset++: Towards Understanding Few-Shot Performance on Difficult Tasks</a></div>
           <div class="pub-authors"><span class="me">S. Basu</span>, M. Stanley, J. Bronskill, S. Feizi, D. Massiceti</div>
         </div>
         <div class="pub-venue">ICLR 2023</div>
       </div>
 
-      <div class="pub" data-year="earlier">
+      <div class="pub" data-year="earlier" data-type="conf">
+        <div class="pub-year">2023</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2310.17041">On Surgical Fine-tuning for Language Encoders</a></div>
+          <div class="pub-authors">A. Lodha, G. Belapurkar, S. Chalkapurkar, Y. Tao, R. Ghosh, <span class="me">S. Basu</span>, D. Petrov, S. Srinivasan</div>
+        </div>
+        <div class="pub-venue">EMNLP 2023<br><span class="badge">Findings</span></div>
+      </div>
+
+      <div class="pub" data-year="earlier" data-type="pre">
+        <div class="pub-year">2023</div>
+        <div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2310.02426">EditVal: Benchmarking Diffusion Based Text-Guided Image Editing Methods</a></div>
+          <div class="pub-authors"><span class="me">S. Basu</span>, M. Saberi, S. Bhardwaj, A. Chegini, D. Massiceti, M. Sanjabi, S. Hu, S. Feizi</div>
+        </div>
+        <div class="pub-venue">arXiv 2023<br><span class="badge pre">Preprint</span></div>
+      </div>
+
+      <div class="pub" data-year="earlier" data-type="conf">
         <div class="pub-year">2021</div>
         <div>
-          <div class="pub-title"><a href="https://arxiv.org/abs/2006.14651">Influence Functions in Deep Learning are Fragile</a></div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/2006.14651">Influence Functions in Deep Learning Are Fragile</a></div>
           <div class="pub-authors"><span class="me">S. Basu</span>, P. Pope, S. Feizi</div>
         </div>
         <div class="pub-venue">ICLR 2021</div>
       </div>
 
-      <div class="pub" data-year="earlier">
+      <div class="pub" data-year="earlier" data-type="conf">
         <div class="pub-year">2020</div>
         <div>
           <div class="pub-title"><a href="http://proceedings.mlr.press/v119/basu20b.html">On Second-Order Group Influence Functions for Black-Box Predictions</a></div>
@@ -760,6 +1232,7 @@
         <div class="pub-venue">ICML 2020</div>
       </div>
     </div>
+    <p class="pub-note">† senior / last author</p>
 
     <div class="ornament">· · ·</div>
     <p style="text-align: center; color: var(--ink-faint); font-style: italic; font-size: 15px;">
@@ -772,7 +1245,7 @@
 <section id="experience">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">04 / Experience</span>
+      <span class="sec-num">05 / Experience</span>
       <span class="sec-title">Trajectory</span>
       <span class="sec-rule"></span>
     </div>
@@ -782,7 +1255,7 @@
       <div>
         <div class="exp-role">Research Scientist</div>
         <div class="exp-org">Adobe Research, San Jose</div>
-        <div class="exp-desc">Key researcher for the mid-training and post-training stack for SLMs and Vision-Language models. Shipped models powering grounding and retrieval in Adobe products. Developed fast inference techniques delivering 10× latency improvements.</div>
+        <div class="exp-desc">Key researcher for the mid-training and post-training stack for SLMs and Vision-Language models. Shipped models powering grounding and retrieval in Adobe products, including continuous image editing in Firefly (Tune / Generative Restyle), on-device attribution in Brand Concierge, and document parsing in GenStudio. Developed fast inference techniques delivering 10× latency improvements.</div>
       </div>
     </div>
 
@@ -855,7 +1328,7 @@
 <section id="contact" style="border-bottom: none;">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num">05 / Contact</span>
+      <span class="sec-num">06 / Contact</span>
       <span class="sec-title">Get in touch</span>
       <span class="sec-rule"></span>
     </div>
@@ -913,10 +1386,73 @@
       btn.classList.add('active');
       const f = btn.dataset.filter;
       pubs.forEach(p => {
-        p.style.display = (f === 'all' || p.dataset.year === f) ? '' : 'none';
+        p.style.display = (f === 'all' || p.dataset.year === f || p.dataset.type === f) ? '' : 'none';
       });
     });
   });
+
+  // ---- Product impact: continuous-edit slider demo ----
+  (function () {
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+    const mix = (a, b, t) => { const A = hex(a), B = hex(b); return 'rgb(' + A.map((v, i) => Math.round(lerp(v, B[i], t))).join(',') + ')'; };
+    function scene(t, uid) {
+      const skyTop = mix('#a9cde4', '#3a1d4f', t), skyBot = mix('#eef5f1', '#ff8a3d', t);
+      const sun = mix('#fff8dc', '#ffb347', t), sunY = lerp(48, 118, t), sunR = lerp(16, 24, t);
+      const h1 = mix('#a7c493', '#6b3a3a', t), h2 = mix('#7ea56b', '#3a1f33', t), h3 = mix('#5d8a52', '#22121f', t);
+      const lake = mix('#bcd9e6', '#ff9f5a', t), glow = (t * 0.55).toFixed(2);
+      return `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="sk${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${skyTop}"/><stop offset="1" stop-color="${skyBot}"/></linearGradient>
+        <radialGradient id="gl${uid}"><stop offset="0" stop-color="${sun}" stop-opacity="${glow}"/><stop offset="1" stop-color="${sun}" stop-opacity="0"/></radialGradient></defs>
+        <rect width="320" height="200" fill="url(#sk${uid})"/>
+        <circle cx="200" cy="${sunY}" r="90" fill="url(#gl${uid})"/>
+        <circle cx="200" cy="${sunY}" r="${sunR}" fill="${sun}"/>
+        <path d="M0 120 Q60 80 120 112 T240 100 T320 108 V200 H0Z" fill="${h1}"/>
+        <path d="M0 140 Q80 108 160 136 T320 128 V200 H0Z" fill="${h2}"/>
+        <rect y="150" width="320" height="50" fill="${lake}"/>
+        <rect x="180" y="152" width="40" height="3" fill="${sun}" opacity="${(0.3 + t * 0.6).toFixed(2)}"/>
+        <rect x="170" y="160" width="60" height="2" fill="${sun}" opacity="${(0.2 + t * 0.5).toFixed(2)}"/>
+        <path d="M0 170 Q50 150 100 168 T200 178 T320 186 V200 H0Z" fill="${h3}"/>
+      </svg>`;
+    }
+    const main = document.getElementById('restyle-main');
+    const range = document.getElementById('restyle-range');
+    const val = document.getElementById('restyle-val');
+    const strip = document.getElementById('restyle-strip');
+    if (!main) return;
+    const stops = [0, 25, 50, 75, 100];
+    strip.innerHTML = stops.map((s, i) => `<button type="button" data-v="${s}" aria-label="Intensity ${s}%">${scene(s / 100, 't' + i)}</button>`).join('');
+    const btns = strip.querySelectorAll('button');
+    function render() {
+      const v = +range.value;
+      main.innerHTML = scene(v / 100, 'm');
+      val.textContent = v + '%';
+      btns.forEach(b => b.classList.toggle('on', Math.abs(+b.dataset.v - v) <= 12));
+    }
+    btns.forEach(b => b.addEventListener('click', () => { range.value = b.dataset.v; render(); }));
+    range.addEventListener('input', render);
+    render();
+  })();
+
+  // ---- Product impact: attribution hover ----
+  (function () {
+    const sents = document.querySelectorAll('.attr-sent-g');
+    const links = document.querySelectorAll('.attr-link');
+    const srcs = document.querySelectorAll('.attr-src');
+    function show(i) {
+      sents.forEach(g => { const r = g.querySelector('rect'); r.classList.toggle('f-accs', g.dataset.i == i); r.classList.toggle('f-alt', g.dataset.i != i); });
+      links.forEach(l => { const on = l.dataset.i == i; l.classList.toggle('s-acc', on); l.classList.toggle('s-faint', !on); l.setAttribute('stroke-dasharray', on ? '' : '3 3'); });
+      srcs.forEach(s => {
+        const on = s.dataset.i == i;
+        s.setAttribute('opacity', on ? '1' : '0.55');
+        const box = s.querySelector('rect'); box.classList.toggle('s-acc', on); box.classList.toggle('s-rule', !on);
+        const lbl = s.querySelector('text'); lbl.classList.toggle('f-acc', on); lbl.classList.toggle('f-faint', !on);
+      });
+    }
+    sents.forEach(g => { g.style.cursor = 'pointer'; g.addEventListener('mouseenter', () => show(g.dataset.i)); g.addEventListener('click', () => show(g.dataset.i)); });
+    let k = 0, auto = setInterval(() => { k = (k + 1) % 3; show(k); }, 2600);
+    sents.forEach(g => g.addEventListener('mouseenter', () => clearInterval(auto), { once: true }));
+  })();
 </script>
 
 </body>
